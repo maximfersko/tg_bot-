@@ -190,3 +190,90 @@ const start = () => {
 }
 
 start()
+
+
+
+
+
+
+
+
+
+const getHelp = () => {
+    let helpText = `Телеграм-бот, созданный для развлечения, а не для работы.\n*Доступные команды:*\n`;
+    helpText += commandsDB.map(
+        (command) => `*/${command.command}* ${command.description}`
+    ).join(`/n`);
+    return helpText;
+};
+
+bot.on("audio", () => {
+    return getHelp();
+});
+
+bot.on("whoami", (e) => {
+    const { id, username, first_name, last_name } = e.from;
+    return e.replyWithMarkdown(`Кто ты в телеграмме:
+        *id* : ${id}
+        *username* : ${username}
+        *Имя* : ${first_name}
+        *Фамилия* : ${last_name}`);
+});
+
+
+
+/*  bot.onText(/\/inlineTab/,msg => {
+            bot.sendMessage(chatId, 'inline keyboard', {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Google',
+                                url: 'https://google.com'
+                            }
+                        ],
+                        [
+                            {
+                                text:'Reply',
+                                callback_data: 'reply'
+                            }
+                        ],
+                        [
+                            {
+                                text:'Forward',
+                                callback_data: 'forward'
+                            }
+                        ]
+                    ]
+                }
+            })
+
+             bot.on('callback_query', query => {
+                 //bot.sendMessage(query.message.chat.id, debug(query))
+
+                 //bot.answerCallbackQuery(query.id, `${query.data}`)
+             })
+        })*/
+
+
+
+
+/*bot.on('inline_query', query =>{
+
+           const results = []
+
+           for(let i = 0;i < 5; i++){
+               results.push({
+                   type:'article',
+                   id: i.toString(),
+                   title: 'Title' + i,
+                   input_message_content: {
+                       message_text: `Article #${i+1}`
+                   }
+               })
+           }
+
+           bot.answerInlineQuery(query.id, results, {
+               cache_time: 0
+           })
+       })*/
