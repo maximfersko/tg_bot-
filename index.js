@@ -142,6 +142,10 @@ const start = () => {
             <i>how are you doing ?</i>
             <strong>Creater</strong><pre>:fersko</pre>  `
 
+    const fers = ` <strong> -> ${msg.from.first_name} () ${msg.from.last_name} <- 
+                               ^           ^            ^            ^         ^
+                               |           |            |            |         |<strong`
+
 
     const inline_keyboard = [
       [{
@@ -220,7 +224,7 @@ const start = () => {
           force_reply: true
         }
       })
-    } else bot.onText(/\/test/, msg => {
+    } else bot.onText(/\/inlineKeyboard/, msg => {
       bot.sendMessage(chatId, '.', {
         reply_markup: {
           keyboard: [
@@ -254,6 +258,11 @@ const start = () => {
       return bot.sendMessage(chatId, html, {
         parse_mode: 'HTML'
       })
+    }
+    if (text === "fersco") {
+        return bot.sendMessage(chatId, fers, {
+          parse_mode: 'HTML'
+        })
     }
     if (text === '/clickmepls') {
       return bot.sendMessage(chatId, `так так  ${msg.from.first_name}-мирная мне с тобой так повезло,Люблю тебя очень сильно ❤️`)
@@ -307,19 +316,19 @@ const start = () => {
 
   })
 
-  /*bot.on('callback_query', async msg => {
-      const dataForGames = msg.data;
-      const chatId = msg.chat.id;
+  bot.on('callback_query', async msg => {
+    const dataForGames = msg.data;
+    const chatId = msg.chat.id;
 
-      if (dataForGames === '/again') {
-          return startGame(chatId)
-      }
-      if (dataForGames == chats[chatId]) {
-         return bot.sendMessage(chatId, `Поздравляю, ты отгадал цифру ${chats[chatId]}`, againOptions);
-      } else if (dataForGames !== chats[chatId]){
-          return  bot.sendMessage(chatId, `К сожалению ты не угадал, бот загадал цифру ${chats[chatId]}`, againOptions);
-      }
-  })*/
+    if (dataForGames === '/again') {
+      return startGame(chatId)
+    }
+    if (dataForGames == chats[chatId]) {
+      return bot.sendMessage(chatId, `Поздравляю, ты отгадал цифру ${chats[chatId]}`, againOptions);
+    } else if (dataForGames !== chats[chatId]) {
+      return bot.sendMessage(chatId, `К сожалению ты не угадал, бот загадал цифру ${chats[chatId]}`, againOptions);
+    }
+  })
 
   //401643678:TEST:19a69b50-5b5e-4b12-b2ab-b0444e60f0c8
 }
